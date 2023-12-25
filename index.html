@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot</title>
+</head>
+<body>
+    <style>
+        @font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/plusjakartasans/v8/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yw.woff2') format('woff2');
+}
+body {
+            font-family: 'Plus Jakarta Sans';
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.chatbot-container {
+  width: 400px;
+  /* border: 1px solid #ccc; */
+  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+    border-radius: 30px;
+  overflow: hidden;
+}
+
+.chatbot-header {
+    background: #1ADDA4;
+     color: #fff;
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.chatbot-messages {
+  padding: 10px;
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.message {
+  margin-bottom: 8px;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.message-header {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.system-message {
+  background: #F4E0EF;
+  color: black;
+  align-self: flex-start;
+}
+
+.user-message {
+  background: linear-gradient(to right, #aaffa9, #11ffbd);
+  color: #333;
+  align-self: flex-end;
+}
+
+.chatbot-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+button {
+  background: linear-gradient(to right, #64b5f6, #1976d2);
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+    </style>
+  <div class="chatbot-container">
+    <div class="chatbot-header">Chatbot</div>
+    <div class="chatbot-messages" id="chatbot-messages"></div>
+    <div class="chatbot-input">
+      <input type="text" id="inputMessage" placeholder="Type your message...">
+      <button id="sendButton">Send</button>  
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

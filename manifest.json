@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Gemini Chat",
+  "version": "1.0",
+  "description": "A simple chatbot extension",
+  "action":{
+    "default_popup":"index.html",
+    "default_title":"Open the popup"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "webNavigation"
+  ]
+}
