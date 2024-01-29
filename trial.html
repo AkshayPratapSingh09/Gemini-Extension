@@ -1,0 +1,257 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+    <title>Markdown Display</title>
+    <style>
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="content"></div>
+
+    <script>
+        
+        const codeBlocks = data.match(/`{3}([\s\S]*?)`{3}/g);
+        const text = data.replace(/`{3}([\s\S]*?)`{3}/g, '');
+        
+        // Display plain text first
+        const textElement = document.createElement('p');
+        textElement.textContent = text;
+        document.getElementById('content').appendChild(textElement);
+        
+        // Process and display code blocks with headings
+        codeBlocks.forEach(codeBlock => {
+            // Check for heading at the beginning
+            const headingMatch = codeBlock.match(/^(#+) (.*)$/m);
+            const isHeadingAbove = headingMatch && headingMatch.index === 0;
+
+            if (isHeadingAbove) {
+                const headingLevel = headingMatch[1].length;
+                const headingText = headingMatch[2].trim();
+
+                const headingElement = document.createElement('h' + headingLevel);
+                headingElement.textContent = headingText;
+                document.getElementById('content').appendChild(headingElement);
+                
+                codeBlock = codeBlock.slice(headingMatch[0].length); // Remove heading from code block
+            }
+
+            // Escape code and create code element
+            const escapedCode = codeBlock.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            const codeElement = document.createElement('pre');
+            codeElement.textContent = escapedCode;
+            document.getElementById('content').appendChild(codeElement);
+            
+            // Apply syntax highlighting
+            hljs.highlightBlock(codeElement);
+            
+            // Check for heading at the end
+            if (!isHeadingAbove) {
+                const headingMatch = codeBlock.match(/\n(#+) (.*)$/m);
+                if (headingMatch) {
+                    const headingLevel = headingMatch[1].length;
+                    const headingText = headingMatch[2].trim();
+                    
+                    const headingElement = document.createElement('h' + headingLevel);
+                    headingElement.textContent = headingText;
+                    document.getElementById('content').appendChild(headingElement);
+                }
+            }
+        });
+
+    </script>
+    
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Display with Syntax Highlighting</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/styles/default.min.css">
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+</head>
+<body>
+  <div id="content"></div>
+
+  <script>
+      const data = `
+      ### Normal Function
+      
+      **Function Declaration:**
+      \`\`\`javascript
+      function functionName(parameters) {
+      // code to be executed
+      }
+      \`\`\`
+      
+      **Example:**
+      \`\`\`javascript
+      function add(a, b) {
+      return a + b;
+      }
+      const result = add(1, 2); // 3
+      \`\`\`
+      
+      **Function Expression:**
+      \`\`\`javascript
+      const functionName = function(parameters) {
+      // code to be executed
+      };
+      \`\`\`
+      
+      **Example:**
+      \`\`\`javascript
+      const add = function(a, b) {
+      return a + b;
+      };
+      const result = add(1, 2); // 3
+      \`\`\`
+      
+      ### Arrow Function
+      
+      **Concise Arrow Function:**
+      \`\`\`javascript
+      (parameters) => expression
+      \`\`\`
+      
+      **Example:**
+      \`\`\`javascript
+      const add = (a, b) => a + b;
+      const result = add(1, 2); // 3
+      \`\`\`
+      
+      **Block Body Arrow Function:**
+      \`\`\`javascript
+      (parameters) => {
+      // code to be executed
+      }
+      \`\`\`
+      
+      **Example:**
+      \`\`\`javascript
+      const add = (a, b) => {
+      return a + b;
+      };
+      const result = add(1, 2); // 3
+      \`\`\`
+      
+      ### Multiple Implementations
+      
+      **Example 1:**
+      \`\`\`javascript
+      // Normal function declaration
+      function add(a, b) {
+      return a + b;
+      }
+      
+      // Arrow function expression
+      const subtract = (a, b) => a - b;
+      
+      // Normal function expression
+      const multiply = function(a, b) {
+      return a * b;
+      };
+      
+      // Arrow function with block body
+      const divide = (a, b) => {
+      if (b === 0) {
+      throw new Error("Cannot divide by zero");
+      }
+      return a / b;
+      };
+      \`\`\`
+      
+      **Example 2:**
+      \`\`\`javascript
+      // Normal function as a method of an object
+      const person1 = {
+      name: "John Doe",
+      greet: function() {
+      console.log(\`Hello, my name is \${this.name}\`);
+      }
+      };
+      person1.greet(); // Hello, my name is John Doe
+      
+      // Arrow function as a method of an object
+      const person2 = {
+      name: "Jane Doe",
+      greet: () => {
+      console.log(\`Hello, my name is \${this.name}\`);
+      }
+      };
+      person2.greet(); // Hello, my name is undefined
+      \`\`\`
+      `;
+
+    const codeBlocks = data.match(/`{3}([\s\S]*?)`{3}/g);
+    const textParts = data.split(/`{3}([\s\S]*?)`{3}/g);
+
+    let currentText = '';
+    textParts.forEach((part, index) => {
+        if (index % 2 === 0) { // Text part
+        currentText += part;
+        const textElement = document.createElement('p');
+        textElement.textContent = currentText;
+        document.getElementById('content').appendChild(textElement);
+        currentText = '';
+      } else { // Code block
+        const codeBlock = part;
+        
+        // Check for heading at the beginning
+        const headingMatch = codeBlock.match(/^(#+) (.*)$/m);
+        const isHeadingAbove = headingMatch && headingMatch.index === 0;
+        
+        if (isHeadingAbove) {
+          const headingLevel = headingMatch[1].length;
+          const headingText = headingMatch[2].trim();
+          
+          const headingElement = document.createElement('h' + headingLevel);
+          headingElement.textContent = headingText;
+          document.getElementById('content').appendChild(headingElement);
+
+          codeBlock = codeBlock.slice(headingMatch[0].length);
+        }
+
+        // Escape code and create code element
+        const escapedCode = codeBlock.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const codeElement = document.createElement('pre');
+        codeElement.textContent = escapedCode;
+        document.getElementById('content').appendChild(codeElement);
+
+        // Apply syntax highlighting
+        hljs.highlightBlock(codeElement);
+
+        // Check for heading at the end
+        if (!isHeadingAbove) {
+          const headingMatch = codeBlock.match(/\n(#+) (.*)$/m);
+          if (headingMatch) {
+            const headingLevel = headingMatch[1].length;
+            const headingText = headingMatch[2].trim();
+
+            const headingElement = document.createElement('h' + headingLevel);
+            headingElement.textContent = headingText;
+            document.getElementById('content').appendChild(headingElement);
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

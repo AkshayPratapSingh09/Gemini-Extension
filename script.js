@@ -2,6 +2,7 @@
 
 const messagesContainer = document.getElementById('chatbot-messages');
 const inputMessage = document.getElementById('inputMessage');
+var md = window.markdownit()
 
 // Add a welcome message when the chatbot starts
 appendMessage('system', 'Hello! How can I help you?');
@@ -22,9 +23,12 @@ function appendMessage(type, text) {
     headerDiv.textContent = 'System:';
     messageDiv.appendChild(headerDiv);
 }
-
-const textNode = document.createTextNode(text);
-messageDiv.appendChild(textNode);
+var preElement = document.createElement('pre');
+preElement.classList.add('typed');
+preElement.innerHTML= md.render(text)
+// const textNode = document.createTextNode(text);
+// preElement.appendChild(md.render(text))
+messageDiv.appendChild(preElement);
 
 messagesContainer.appendChild(messageDiv);
 messagesContainer.scrollTop = messagesContainer.scrollHeight;
